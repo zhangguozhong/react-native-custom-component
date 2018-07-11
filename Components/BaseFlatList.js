@@ -227,7 +227,7 @@ export default class BaseFlatList extends Component {
                 data={this.state.data}
                 renderItem={this.renderItem}
                 refreshControl={this.renderRefreshControl()}
-                keyExtractor={(item, index) => index}
+                keyExtractor={(item, index) => index.toString()}
                 ListFooterComponent={this.renderFooter}
                 onEndReachedThreshold={this.props.onEndReachedThreshold}
                 onLayout={this.onLayout}
