@@ -35,6 +35,7 @@ export default class BaseFlatList extends Component {
         onLoadMoreRequest:PropTypes.func, //上拉加载更多回调
 
         initialNumToRender:PropTypes.number, //首次加载数据条数,
+        onEndReachedThreshold:PropTypes.number,
         renderItem:PropTypes.func
     };
     static defaultProps = {
@@ -51,6 +52,7 @@ export default class BaseFlatList extends Component {
         onLoadMoreRequest:null,
 
         initialNumToRender:20,
+        onEndReachedThreshold:0.1,
         renderItem:null
     };
 
@@ -64,7 +66,7 @@ export default class BaseFlatList extends Component {
         this._onEndReached = this._onEndReached.bind(this);
 
         this.state={
-            dataSource:this.props.data,
+            data:this.props.data,
             status:STATUS_LOAD_MORE_IDLE,
             shouldBeLoadMore:false
         }
@@ -72,7 +74,7 @@ export default class BaseFlatList extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            dataSource:nextProps.data
+            data:nextProps.data
         });
         if (!nextProps.isLoadingMore) {
             this.setState({status:STATUS_LOAD_MORE_IDLE});
@@ -222,12 +224,12 @@ export default class BaseFlatList extends Component {
             <FlatList
                 ref={(flatList) => this.flatList = flatList}
                 initialNumToRender={this.props.initialNumToRender}
-                data={this.state.dataSource}
+                data={this.state.data}
                 renderItem={this.renderItem}
                 refreshControl={this.renderRefreshControl()}
-                keyExtractor={(item, index) => item + index}
+                keyExtractor={(item, index) => index}
                 ListFooterComponent={this.renderFooter}
-                onEndReachedThreshold={0.1}
+                onEndReachedThreshold={this.props.onEndReachedThreshold}
                 onLayout={this.onLayout}
                 onContentSizeChange={(contentWidth, contentHeight) => {
                     this.contentSize = {width:contentWidth, height:contentHeight};
