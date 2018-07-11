@@ -1,5 +1,7 @@
 # react-native-custom-component
 
+简单封装的一些component
+
 
 ## 如何使用
 
@@ -8,7 +10,7 @@
 import BaseScrollView from './Components/BaseScrollView'
 import BaseFlatList from './Components/BaseFlatList'
 
-
+//上拉加载更多
 onLoadMoreRequest() {
         this.setState({isLoadingMore:true});
         let timer = setInterval(() => {
@@ -19,6 +21,7 @@ onLoadMoreRequest() {
         }, 3000);
     }
 
+//渲染行信息
     renderItem(item, index) {
         return(
             <View key={index} style={styles.rowView}>
@@ -29,6 +32,7 @@ onLoadMoreRequest() {
         )
     }
 
+//下拉刷新
   onPullRequest(){
       this.setState({
           isLoadingMore:false,
