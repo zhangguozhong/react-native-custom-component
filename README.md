@@ -1,6 +1,6 @@
 # react-native-custom-component
 
-简单封装的一些component
+简单封装的一些component，还有很多可以改进的地方。
 
 
 ## 如何使用
